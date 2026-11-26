@@ -1,8 +1,8 @@
-# DexPaper
+# Deskmat
 
 Dynamic wallpapers for **Samsung DeX** and Galaxy foldables.
 
-The main project is **Deskmat** (`DexBackdrop/`), an Android app that manages the wallpaper of every Samsung screen separately: the DeX desktop and DeX lock screen, the main screen and the cover screen. It changes them on a schedule, by place, by time of day or from Samsung Modes and Routines.
+Deskmat is an Android app (source in `DexBackdrop/`) that manages the wallpaper of every Samsung screen separately: the DeX desktop and DeX lock screen, the main screen and the cover screen. It changes them on a schedule, by place, by time of day or from Samsung Modes and Routines.
 
 Stock One UI has only one static DeX wallpaper, and Routines has no action to change it. Deskmat writes Samsung's DeX wallpaper slot (`which = SYSTEM | FLAG_DISPLAY_DEX = 9`) directly, with only the normal `SET_WALLPAPER` permission. [`DEX_WALLPAPER_NOTES.md`](DEX_WALLPAPER_NOTES.md) explains how that works.
 
@@ -34,8 +34,8 @@ Stock One UI has only one static DeX wallpaper, and Routines has no action to ch
 Download `Deskmat-<version>.apk` from the **Releases** page and install it. Your browser or file manager will ask you to allow installs from unknown sources.
 
 Releases are posted to both mirrors:
-- GitHub: https://github.com/UiharuKazari2008/DexPaper/releases
-- Yozora: https://yozora.bluesteel.737.jp.net/UiharuKazari2008/DexPaper/releases
+- GitHub: https://github.com/UiharuKazari2008/Deskmat/releases
+- Yozora: https://yozora.bluesteel.737.jp.net/UiharuKazari2008/Deskmat/releases
 
 Optional permissions, each only needed for the feature that uses it:
 
@@ -86,7 +86,7 @@ export JAVA_TOOL_OPTIONS="-Djdk.net.unixdomain.tmpdir=C:/Users/Public"
 
 | Path | Contents |
 |---|---|
-| `DexBackdrop/` | The Deskmat Android app (Kotlin, Jetpack Compose, Material 3) |
+| `DexBackdrop/` | The Deskmat Android app (Kotlin, Jetpack Compose, Material 3). DexPaper and DexBackdrop were early internal names. |
 | `DexBackdrop/app/src/main/cpp/` | Native upscaler (ncnn and Real-ESRGAN) |
 | `DexBackdrop/docs/` | Remote API and the draft integrations spec |
 | `DexBackdrop/tools/` | Icon and widget generator scripts |
