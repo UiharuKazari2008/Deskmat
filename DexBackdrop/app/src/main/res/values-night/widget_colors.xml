@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="widget_m_bg">@android:color/system_accent1_800</color>
+    <color name="widget_m_fg">@android:color/system_accent1_100</color>
+    <color name="widget_m_track">@android:color/system_accent1_700</color>
+    <color name="widget_m_thumb">@android:color/system_accent1_200</color>
+    <color name="widget_m_on_thumb">@android:color/system_accent1_800</color>
+    <color name="widget_o_bg">#E6000000</color>
+    <color name="widget_o_fg">#FFF1F0F7</color>
+    <color name="widget_o_track">#17FFFFFF</color>
+    <color name="widget_o_thumb">@android:color/system_accent1_400</color>
+    <color name="widget_o_on_thumb">#FFFFFFFF</color>
+    <color name="widget_o_bg_base">#FF000000</color>
+    <color name="widget_o_track_base">#FF383838</color>
+</resources>

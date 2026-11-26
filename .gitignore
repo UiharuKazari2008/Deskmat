@@ -1,0 +1,22 @@
+# Gradle / Android build output
+.gradle/
+build/
+.cxx/
+.kotlin/
+local.properties
+captures/
+*.apk
+*.aab
+# IDE
+.idea/
+*.iml
+.vscode/
+# Signing / secrets
+*.jks
+*.keystore
+keystore.properties
+.env
+# OS
+.DS_Store
+Thumbs.db
+*.log

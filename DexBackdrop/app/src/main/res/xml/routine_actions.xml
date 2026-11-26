@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Samsung Modes and Routines (SDK v3) actions; handled by RoutineSdkContentProvider. -->
+<actions>
+    <action
+        category="display_setting"
+        description="@string/routine_set_desc"
+        icon="@drawable/ic_launcher_monochrome"
+        label="@string/routine_set_label"
+        tag="dexwp_set_wallpaper">
+        <configuration targetUi="dev.dexwp.backdrop/dev.dexwp.backdrop.routines.RoutineConfigActivity" />
+    </action>
+    <action
+        category="display_setting"
+        description="@string/routine_flag_desc"
+        icon="@drawable/ic_launcher_monochrome"
+        label="@string/routine_flag_label"
+        tag="dexwp_set_flag">
+        <configuration targetUi="dev.dexwp.backdrop/dev.dexwp.backdrop.routines.RoutineConfigActivity" />
+    </action>
+</actions>

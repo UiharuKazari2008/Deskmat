@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
+    <!-- The access request dialog hides other apps' overlays so nobody can trick a tap on Allow. -->
+    <uses-permission android:name="android.permission.HIDE_OVERLAY_WINDOWS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Screen watcher: "next image when the screen turns off" needs a running service. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- "Must have been seen": when the home screen was last opened (Usage access, granted by the user). -->
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <!-- Reading the current wallpaper file (One UI requires it) and `dexwp file <path>`. -->
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+
+    <!-- Samsung Gallery as the image picker. -->
+    <queries>
+        <package android:name="com.sec.android.gallery3d" />
+        <!-- Its DeX service tells whether this phone supports DeX. -->
+        <package android:name="com.sec.android.app.launcher" />
+    </queries>
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.DexBackdrop">
+
+        <!-- Samsung Modes and Routines plugin (Routines SDK v3). -->
+        <meta-data
+            android:name="com.samsung.android.sdk.routines.v3.meta.ACTION"
+            android:resource="@xml/routine_actions" />
+        <meta-data
+            android:name="com.samsung.android.sdk.routines.v3.meta.CONDITION"
+            android:resource="@xml/routine_conditions" />
+
+        <provider
+            android:name="com.samsung.android.sdk.routines.v3.internal.RoutineSdkContentProvider"
+            android:authorities="${applicationId}.provider.routines.v3"
+            android:exported="true"
+            android:permission="com.samsung.android.permission.sdk.routines.v3.ACCESS_ROUTINES">
+            <intent-filter>
+                <action android:name="com.samsung.android.sdk.routines.v3.ROUTINE_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="com.samsung.android.sdk.routines.v3.version"
+                android:value="3.1.22" />
+            <meta-data
+                android:name="com.samsung.android.sdk.routines.v3.version_code"
+                android:value="30122" />
+        </provider>
+
+        <activity
+            android:name=".routines.RoutineConfigActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:label="Deskmat" />
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Target of app shortcuts (Modes and Routines app actions); no UI. Shown when locked, so a
+             mode switching while the phone is locked runs it right away instead of after unlocking. -->
+        <activity
+            android:name=".system.ShortcutActivity"
+            android:excludeFromRecents="true"
+            android:showWhenLocked="true"
+            android:exported="true"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="dev.dexwp.backdrop.COMMAND" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Remote control for other apps (docs/REMOTE_API.md). Exported without a manifest
+             permission: every call checks the caller against the apps the user allowed. -->
+        <provider
+            android:name=".remote.RemoteProvider"
+            android:authorities="dev.dexwp.backdrop.remote"
+            android:exported="true" />
+        <activity
+            android:name=".remote.AccessRequestActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:theme="@style/Theme.DexBackdrop.Dialog">
+            <intent-filter>
+                <action android:name="dev.dexwp.backdrop.REQUEST_ACCESS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Commands from Termux/adb/Tasker, the schedule tick and system time/boot events. -->
+        <receiver
+            android:name=".system.CommandReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="dev.dexwp.backdrop.COMMAND" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Home screen widgets (Material and One UI styles). -->
+        <receiver
+            android:name=".widget.NextMaterialWidget"
+            android:exported="false"
+            android:label="@string/widget_next_m_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_next_m" />
+        </receiver>
+        <receiver
+            android:name=".widget.NextOneUiWidget"
+            android:exported="false"
+            android:label="@string/widget_next_o_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_next_o" />
+        </receiver>
+        <receiver
+            android:name=".widget.SlideMaterialWidget"
+            android:exported="false"
+            android:label="@string/widget_slide_m_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_slide_m" />
+        </receiver>
+        <receiver
+            android:name=".widget.SlideOneUiWidget"
+            android:exported="false"
+            android:label="@string/widget_slide_o_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_slide_o" />
+        </receiver>
+        <activity
+            android:name=".widget.WidgetConfigActivity"
+            android:excludeFromRecents="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".system.GeofenceReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".system.PassiveLocationReceiver"
+            android:exported="false" />
+
+        <service
+            android:name=".system.DexWatchJobService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!-- Engine runs requested by broadcasts and Routines (outside the broadcast time limit). -->
+        <service
+            android:name=".system.ApplyJobService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".system.ScreenWatchService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Changes the wallpaper each time the screen turns off (ACTION_SCREEN_OFF is only delivered to running apps)." />
+        </service>
+        <service
+            android:name=".system.UpdateJobService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+    </application>
+</manifest>

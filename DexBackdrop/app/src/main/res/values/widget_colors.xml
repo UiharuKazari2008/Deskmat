@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material: dynamic colour (Material You) roles. -->
+    <color name="widget_m_bg">@android:color/system_accent1_100</color>
+    <color name="widget_m_fg">@android:color/system_accent1_800</color>
+    <color name="widget_m_track">@android:color/system_accent1_200</color>
+    <color name="widget_m_thumb">@android:color/system_accent1_600</color>
+    <color name="widget_m_on_thumb">@android:color/system_accent1_0</color>
+    <!-- One UI (as One UI widget packs draw it): near-white capsule, dark glyphs, accent only on the control. -->
+    <color name="widget_o_bg">#F2F8F8FF</color>
+    <color name="widget_o_fg">#FF1A1B20</color>
+    <color name="widget_o_track">#0F000000</color>
+    <color name="widget_o_thumb">@android:color/system_accent1_400</color>
+    <color name="widget_o_on_thumb">#FFFFFFFF</color>
+    <!-- Opaque bases for the shapes: the app tints them at runtime (colour and opacity), and a
+         background tint multiplies with the shape's own alpha, so the shapes themselves must be opaque.
+         These are also what the widget picker's preview shows. -->
+    <color name="widget_o_bg_base">#FFF8F8FF</color>
+    <color name="widget_o_track_base">#FFE4E4EA</color>
+</resources>

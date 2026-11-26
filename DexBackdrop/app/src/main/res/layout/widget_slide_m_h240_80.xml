@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Material "Slide to change" widget, horizontal, 240 dp track, 80 dp tall. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_m_bg"
+    android:clipToOutline="true">
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/track"
+        android:layout_width="240dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:background="@drawable/widget_m_track_80">
+        <!-- Optional preview of the next image at the end of the track; the thumb slides onto it. -->
+        <ImageView
+            android:id="@+id/preview"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="4dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:importantForAccessibility="no" />
+        <TextView
+            android:id="@+id/hint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="86dp"
+            android:layout_marginEnd="86dp"
+            android:gravity="center"
+            android:text="Slide for next"
+            android:textColor="@color/widget_m_fg"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeMaxTextSize="24sp"
+            android:autoSizeStepGranularity="1sp"
+            android:maxLines="1" />
+        <ImageView
+            android:id="@+id/chevrons"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="86dp"
+            android:layout_marginEnd="86dp"
+            android:src="@drawable/widget_chevrons"
+            android:tint="@color/widget_m_fg"
+            android:alpha="0.6"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:importantForAccessibility="no" />
+        <Switch
+            android:id="@+id/slider"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_gravity="start|center_vertical"
+            android:showText="false"
+            android:switchMinWidth="240dp"
+            android:thumb="@drawable/widget_m_thumb_next_80"
+            android:track="@drawable/widget_m_track_clear_80"
+            android:contentDescription="Slide for next wallpaper" />
+    </FrameLayout>
+    </FrameLayout>
+</FrameLayout>

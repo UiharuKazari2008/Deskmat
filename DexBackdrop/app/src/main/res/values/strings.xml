@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Deskmat</string>
+    <string name="routine_set_label">Set Deskmat wallpaper</string>
+    <string name="routine_set_desc">Show a Deskmat image or group, resume automatic, or go to the next image on any screen. Reverts to automatic when the routine ends.</string>
+    <string name="routine_flag_label">Set Deskmat flag</string>
+    <string name="routine_flag_desc">Turn a flag on or off for Deskmat triggers. Reverses when the routine ends.</string>
+    <string name="routine_flag_is_label">Deskmat flag</string>
+    <string name="routine_flag_is_desc">When a Deskmat flag is on or off.</string>
+    <string name="routine_showing_label">DeX wallpaper showing</string>
+    <string name="routine_showing_desc">When a specific Deskmat image is on DeX.</string>
+    <string name="widget_next_m_label">Next wallpaper</string>
+    <string name="widget_next_o_label">Next wallpaper (One UI)</string>
+    <string name="widget_slide_m_label">Slide to change wallpaper</string>
+    <string name="widget_slide_o_label">Slide to change wallpaper (One UI)</string>
+    <string name="widget_next_desc">Tap for the next wallpaper; rolls a die when the group shuffles.</string>
+    <string name="widget_slide_desc">Slide the handle to the end for the next wallpaper. Works wide (3×1) or tall (1×3).</string>
+</resources>

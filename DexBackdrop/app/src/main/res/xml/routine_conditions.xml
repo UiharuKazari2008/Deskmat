@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Samsung Modes and Routines (SDK v3) conditions; state changes are pushed with notifyChange. -->
+<conditions>
+    <condition
+        category="display_setting"
+        description="@string/routine_flag_is_desc"
+        icon="@drawable/ic_launcher_monochrome"
+        label="@string/routine_flag_is_label"
+        tag="dexwp_flag_is">
+        <configuration targetUi="dev.dexwp.backdrop/dev.dexwp.backdrop.routines.RoutineConfigActivity" />
+    </condition>
+    <condition
+        category="display_setting"
+        description="@string/routine_showing_desc"
+        icon="@drawable/ic_launcher_monochrome"
+        label="@string/routine_showing_label"
+        tag="dexwp_showing">
+        <configuration targetUi="dev.dexwp.backdrop/dev.dexwp.backdrop.routines.RoutineConfigActivity" />
+    </condition>
+</conditions>

@@ -1,0 +1,47 @@
+#!/data/data/com.termux/files/usr/bin/sh
+# dexwp - control Deskmat from Termux (or adb shell).
+#
+#   slots: home lock (DeX), main mainlock, cover coverlock
+#   dexwp set <name> [slot]           pin a gallery wallpaper by its command name or name
+#   dexwp clear [slot]                back to triggers
+#   dexwp flag <name> [on|off|toggle] set a flag used by triggers
+#   dexwp unflag <name>
+#   dexwp file <path> [slot]          import an image (shared storage) and pin it
+#   dexwp automatic [slot] [on|off|next]  toggle Automatic or advance the active group
+#   dexwp next [slot]                 advance the active group now
+#   dexwp downsample off|dex|<width>       pre-scale images on the phone
+#   dexwp status | list | flags | refresh
+#
+# Install: cp ~/storage/downloads/dexwp $PREFIX/bin/ && chmod +x $PREFIX/bin/dexwp
+
+cmd="${1:-status}"
+[ $# -gt 0 ] && shift
+arg="" target="" state=""
+case "$cmd" in
+  set|apply) arg="$1"; target="$2" ;;
+  file)
+    arg="$1"; target="$2"
+    if command -v realpath >/dev/null 2>&1; then arg="$(realpath "$arg")"; fi
+    ;;
+  clear|auto) target="$1" ;;
+  flag) arg="$1"; state="${2:-on}" ;;
+  unflag|downsample) arg="$1" ;;
+  automatic|shuffle|next)
+    for a in "$@"; do case "$a" in home|lock|main|mainlock|cover|coverlock) target="$a" ;; *) state="$a" ;; esac; done
+    ;;
+  -h|--help|help) sed -n '2,15p' "$0"; exit 0 ;;
+esac
+
+set -- -n dev.dexwp.backdrop/.system.CommandReceiver -a dev.dexwp.backdrop.COMMAND --es cmd "$cmd"
+[ -n "$arg" ] && set -- "$@" --es arg "$arg"
+[ -n "$target" ] && set -- "$@" --es target "$target"
+[ -n "$state" ] && set -- "$@" --es state "$state"
+
+out="$(am broadcast --user 0 "$@" 2>&1)"
+reply="$(printf '%s\n' "$out" | sed -n '/data="/,$p' | sed '1s/.*data="//; $s/"$//')"
+if [ -n "$reply" ]; then
+  printf '%s\n' "$reply"
+  case "$reply" in error*) exit 1 ;; esac
+else
+  printf '%s\n' "$out"
+fi

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- One UI widgets are fully rounded (a capsule, or a circle when square); Material follows the launcher's widget radius. -->
+    <dimen name="widget_o_radius">1000dp</dimen>
+</resources>

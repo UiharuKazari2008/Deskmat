@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Three chevrons pointing along the track: "slide this way". -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp" android:height="16dp" android:viewportWidth="36" android:viewportHeight="16">
+    <path android:fillColor="#FFFFFFFF" android:pathData="M2,1.5l2.5,-1.5l7,8l-7,8l-2.5,-1.5l5.7,-6.5z" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M13,1.5l2.5,-1.5l7,8l-7,8l-2.5,-1.5l5.7,-6.5z" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M24,1.5l2.5,-1.5l7,8l-7,8l-2.5,-1.5l5.7,-6.5z" />
+</vector>
