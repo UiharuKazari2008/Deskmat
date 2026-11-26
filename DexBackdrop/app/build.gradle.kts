@@ -31,6 +31,8 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            // No release key yet: sign with the debug key so releases update existing installs.
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
